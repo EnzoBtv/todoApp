@@ -12,5 +12,10 @@
       <ion-label>{{todo.title}}</ion-label>
       <ion-checkbox [ngModel]="todo.isEnabled" slot="start"></ion-checkbox>
     </ion-item>
+    <ion-item button (click)="addTodo()">
+      <ion-ripple-effect></ion-ripple-effect>
+      <ion-icon name="add" slot="start"></ion-icon>
+      <ion-label>Add Todo</ion-label>
+    </ion-item>
   </ion-list>
 </ion-content>

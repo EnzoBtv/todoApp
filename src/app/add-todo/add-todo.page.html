@@ -1,0 +1,18 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons>
+			<ion-back-button></ion-back-button>
+		</ion-buttons>
+		<ion-title>addTodo</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-item>
+		<ion-label class="addTodoLabel" position="floating">A fazer:</ion-label>
+		<ion-input [(ngModel)]="model.todoItem" placeholder="What do you want to do"></ion-input>
+	</ion-item>
+	<ion-button class="addTodoButton" (click)="saveTodo()">
+		Save
+	</ion-button>
+</ion-content>
