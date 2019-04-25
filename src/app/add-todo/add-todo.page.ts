@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-todo',
@@ -7,18 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddTodoPage implements OnInit {
 
-  constructor() { 
+  constructor(private http: HttpClient, private router: Router) { 
 
   }
 
   model : any = {
-    todoItem: ''
+    title: ''
   };
 
   ngOnInit() {
   }
 
   saveTodo = () => {
-    console.log(this.model.todoItem)
+    this.model.isEnabled = false;
+    this.http.post('http://localhost:3000/api/todos', this.model).subscribe(() => {
+      this.router.navigate(['tab1']);
+    })
   }
 }
