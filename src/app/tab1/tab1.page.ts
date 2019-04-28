@@ -1,6 +1,8 @@
+import { AddTodoPage } from './../add-todo/add-todo.page';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ModalController } from '@ionic/angular';
 
 @Component({
 	selector: 'app-tab1',
@@ -11,7 +13,7 @@ import { HttpClient } from '@angular/common/http';
 export class Tab1Page {
 	initialTodos: any = [];
 	
-	constructor(private router: Router, private http: HttpClient) { 
+	constructor(private router: Router, private http: HttpClient, private modal: ModalController) { 
 		this.getTodos();
 	}
 
@@ -19,8 +21,14 @@ export class Tab1Page {
 		this.getTodos();
 	}
 	
-	addTodo() {
-		this.router.navigate(['add-todo']);
+	async addTodo() {
+		const modal = await this.modal.create({
+			component: AddTodoPage
+		});
+		await modal.present();
+		modal.onDidDismiss().then(() => {
+			this.getTodos();
+		})
 	}
 
 	async getTodos() {

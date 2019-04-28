@@ -23,6 +23,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     HttpClientModule
   ],
-  declarations: [AddTodoPage]
+  declarations: [AddTodoPage],
+  entryComponents: [AddTodoPage]
 })
 export class AddTodoPageModule {}
