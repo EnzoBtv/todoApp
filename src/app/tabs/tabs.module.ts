@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { TabsPageRoutingModule } from './tabs.router.module';
 
 import { TabsPage } from './tabs.page';
+import { EditTodoPageModule } from '../edit-todo/edit-todo.module';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { TabsPage } from './tabs.page';
     CommonModule,
     FormsModule,
     TabsPageRoutingModule,
-    AddTodoPageModule
+    AddTodoPageModule,
+    EditTodoPageModule
   ],
   declarations: [TabsPage]
 })

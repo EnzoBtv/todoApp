@@ -1,7 +1,7 @@
+import { ModalController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { ModalController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-todo',
@@ -24,16 +24,16 @@ export class AddTodoPage implements OnInit {
   saveTodo = () => {
     this.model.isEnabled = false;
     this.http.post('http://localhost:3000/api/todos', this.model).subscribe(async () => {
-      const toast = await this.toastr.create({
-        duration: 2000,
-        message: 'todo saved'
-      })
-      await toast.present()
-      this.dismissModal();
+      const addTodoToastr = await this.toastr.create({
+				message: "Added",
+				duration: 2000
+			});
+			await addTodoToastr.present();
+      this.modal.dismiss();
     })
   }
 
   dismissModal(){
-    this.modal.dismiss({})
+    this.modal.dismiss();
   }
 }
