@@ -23,13 +23,20 @@ export class AddTodoPage implements OnInit {
 
   saveTodo = () => {
     this.model.isEnabled = false;
-    this.http.post('http://localhost:3000/api/todos', this.model).subscribe(async () => {
+    this.http.post('http://localhost:3000/api/todos', this.model).subscribe(async (data: any) => {
+      console.log(data.error.title);
       const addTodoToastr = await this.toastr.create({
 				message: "Added",
 				duration: 2000
 			});
 			await addTodoToastr.present();
       this.modal.dismiss();
+    }, async (err: any) => {
+      const errorToastr = await this.toastr.create({
+				message: err.error.title,
+				duration: 5000
+			});
+			await errorToastr.present();
     })
   }
 
