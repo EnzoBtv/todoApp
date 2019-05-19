@@ -34,6 +34,12 @@ export class AddTodoPage implements OnInit {
 			});
 			await addTodoToastr.present();
       this.modal.dismiss();
+    }, async (err: any) => {
+      const errorToastr = await this.toastr.create({
+				message: err.error.title,
+				duration: 5000
+			});
+			await errorToastr.present();
     })
   }
 
