@@ -22,7 +22,6 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    HttpClientModule,
     CacheModule.forRoot()
   ],
   declarations: [AddTodoPage]
