@@ -1,3 +1,4 @@
+import { CacheModule } from 'ionic-cache';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
@@ -12,7 +13,8 @@ import { Tab1Page } from './tab1.page';
     CommonModule,
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab1Page }]),
-    HttpClientModule
+    HttpClientModule,
+    CacheModule.forRoot()
   ],
   declarations: [Tab1Page]
 })

@@ -1,4 +1,3 @@
-import { CacheModule } from 'ionic-cache';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -7,12 +6,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { EditTodoPage } from './edit-todo.page';
+import { UserRegisterPage } from './user-register.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: EditTodoPage
+    component: UserRegisterPage
   }
 ];
 
@@ -23,8 +22,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     HttpClientModule,
-    CacheModule.forRoot()
   ],
-  declarations: [EditTodoPage]
+  declarations: [UserRegisterPage]
 })
-export class EditTodoPageModule {}
+export class UserRegisterPageModule {}

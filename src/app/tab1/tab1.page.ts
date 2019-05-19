@@ -1,3 +1,4 @@
+import { CacheService } from 'ionic-cache';
 import { EditTodoPage } from './../edit-todo/edit-todo.page';
 import { AddTodoPage } from './../add-todo/add-todo.page';
 import { Component } from '@angular/core';
@@ -14,7 +15,7 @@ import { ModalController, ToastController } from '@ionic/angular';
 export class Tab1Page {
 	initialTodos: any = [];
 	
-	constructor(private router: Router, private http: HttpClient, private modal: ModalController, private toastr: ToastController) { 
+	constructor(private router: Router, private http: HttpClient, private modal: ModalController, private toastr: ToastController, private cache: CacheService) { 
 		this.getTodos();
 	}
 
@@ -33,13 +34,21 @@ export class Tab1Page {
 	}
 
 	async getTodos() {
-		await this.http.get('http://localhost:3000/api/get/todos').subscribe((data: any) => {
+		let userId = undefined;
+    	await this.cache.getItem('userId').then((user: any) => {
+      		userId = user;
+    	});
+		await this.http.get(`http://localhost:3000/api/get/todos/${userId}`).subscribe((data: any) => {
 			this.initialTodos = [...data];
 		})
 	}
 
 	async removeTodo(todo) {
-		await this.http.delete(`http://localhost:3000/api/delete/todo/${todo._id}`).subscribe(async (data: any) => {
+		let userId = undefined;
+    	await this.cache.getItem('userId').then((user: any) => {
+      		userId = user;
+    	});
+		await this.http.delete(`http://localhost:3000/api/delete/todo/${todo._id}/${userId}`).subscribe(async (data: any) => {
 			const removeTodoToastr = await this.toastr.create({
 				message: "Removed",
 				duration: 2000
@@ -61,7 +70,11 @@ export class Tab1Page {
 	}
 
 	async editTodoEnabled(todo) {
-		this.http.put('http://localhost:3000/api/update/todo/enabled', {todoId: todo._id, isEnabled: !todo.isEnabled}).subscribe(() => {
+		let userId = undefined;
+    	await this.cache.getItem('userId').then((user: any) => {
+      		userId = user;
+    	});
+		this.http.put('http://localhost:3000/api/update/todo/enabled', {todoId: todo._id, isEnabled: !todo.isEnabled, userId: userId}).subscribe(() => {
 			this.getTodos();
 		});
 	}
