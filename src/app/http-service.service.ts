@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class HttpServiceService {
 
-  baseUrl: String = 'http://localhost:3000/api'
+  baseUrl: String = 'https://todo-app-api01.herokuapp.com/'
 
   constructor(private http: HttpClient) { }
 
